@@ -4,6 +4,7 @@ package com.example.projektApi.controller;
 import com.example.projektApi.model.User;
 import com.example.projektApi.repository.UserRepository;
 import com.example.projektApi.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
+    public ResponseEntity<User> register(@Valid @RequestBody User user) {
         return ResponseEntity.ok(authService.register(user));
     }
 

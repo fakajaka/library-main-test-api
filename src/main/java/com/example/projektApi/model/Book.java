@@ -1,6 +1,7 @@
 package com.example.projektApi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -11,8 +12,15 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotBlank(message = "Title is required")
     private String title;
+    
+    @NotBlank(message = "Author is required")
     private String author;
+    
+    @NotNull(message = "Year is required")
+    @Min(value = 1000, message = "Year must differ from 0")
     private Integer year;
 
     public Book() {

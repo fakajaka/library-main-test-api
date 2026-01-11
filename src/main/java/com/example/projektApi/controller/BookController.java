@@ -3,6 +3,7 @@ package com.example.projektApi.controller;
 
 import com.example.projektApi.model.Book;
 import com.example.projektApi.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +25,13 @@ public class BookController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+    public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         return ResponseEntity.ok(bookService.addBook(book));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @Valid @RequestBody Book book) {
         return ResponseEntity.ok(bookService.updateBook(id, book));
     }
 

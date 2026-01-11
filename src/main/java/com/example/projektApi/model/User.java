@@ -2,6 +2,7 @@ package com.example.projektApi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*; // Spring Boot 3 używa jakarta, nie javax
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,8 +22,16 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank(message = "Username is required")
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     private String username;
+    
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
+    
+    @Email(message = "Invalid email format")
+    @NotBlank(message = "Email is required")
     private String email;
 
     @Enumerated(EnumType.STRING)
