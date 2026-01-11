@@ -23,7 +23,7 @@ public class ProjektApiApplication {
                 User admin = new User(
                         "admin",
                         passwordEncoder.encode("admin123"),
-                        "admin",
+                        "admin@example.com",
                         Role.ADMIN
                 );
                 userRepository.save(admin);

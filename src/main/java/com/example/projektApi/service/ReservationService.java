@@ -6,6 +6,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
 
 @Service
 public class ReservationService {
@@ -75,5 +78,16 @@ public class ReservationService {
         // User chce status "wykonana", więc rezerwacja zakończona sukcesem.
         reservation.setStatus("COMPLETED");
         reservationRepository.save(reservation);
+    }
+
+    public Map<String, Long> getBookStatistics() {
+        List<Object[]> results = reservationRepository.findMostReservedBooks();
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> ((Book) row[0]).getTitle(),
+                        row -> (Long) row[1],
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 }

@@ -54,4 +54,10 @@ public class ReservationController {
         reservationService.completeReservation(id);
         return ResponseEntity.ok().build();
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Long>> getStats() {
+        return ResponseEntity.ok(reservationService.getBookStatistics());
+    }
 }
