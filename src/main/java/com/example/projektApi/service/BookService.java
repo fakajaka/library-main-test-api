@@ -31,6 +31,7 @@ public class BookService {
                 .orElseThrow(() -> new RuntimeException("Book not found"));
         existingBook.setTitle(book.getTitle());
         existingBook.setAuthor(book.getAuthor());
+        existingBook.setYear(book.getYear());
         existingBook.setStatus(book.getStatus());
         return bookRepository.save(existingBook);
     }
