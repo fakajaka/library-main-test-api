@@ -1,0 +1,10 @@
+package com.example.projektApi.repository;
+
+import com.example.projektApi.model.Book;
+import com.example.projektApi.model.BookStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+    List<Book> findByStatus(BookStatus status);
+}
